@@ -1,5 +1,5 @@
 var circles = [];
-var fillSize = 80;
+var circleSize = 80;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -13,8 +13,16 @@ function windowResized() {
 }
 
 function draw() {
+
+  if (mouseIsPressed && (mouseButton == LEFT)) {
+    var c = new circle(mouseX, mouseY, circleSize);
+    circles.push(c);
+    c.display();
+  }
+
+
   if (touches.length == 1) {
-    var c = new circle(touches[0].x, touches[0].y, fillSize);
+    var c = new circle(touches[0].x, touches[0].y, circleSize);
     circles.push(c);
   } else if (touches.length == 2) {
     var midX = (touches[0].x + touches[1].x) / 2;
@@ -22,7 +30,7 @@ function draw() {
     var d = dist(touches[0].x, touches[0].y, touches[1].x, touches[1].y);
     var c = new circle(midX, midY, d, "stroke");
     circles.push(c);
-    fillSize = d;
+    circleSize = d;
   }
   if (c) {
     c.display();
@@ -41,6 +49,12 @@ function touchEnded() {
   }
 }
 
+function mouseWheel(event) {
+  circleSize += event.delta/100;
+  var c = new circle(mouseX, mouseY, circleSize, "stroke");
+  circles.push(c);
+  c.display();
+}
 
 function circle(x, y, d, fillOrStroke = "fill") {
   this.x = x;
