@@ -9,6 +9,17 @@ function shape(name, args, fillOrStroke = "fill") {
     case "triangle":
       this.shape = new triangleShape(...this.args);
       break;
+    case "square":
+      this.shape = new squareShape(...this.args);
+      break;
+    case "pentagon":
+      multigonShape.sides = 5;
+      this.shape = new multigonShape(...this.args);
+      break;
+    case "octogon":
+      multigonShape.sides = 6;
+      this.shape = new multigonShape(...this.args);
+      break;
   }
 
   this.display = function() {
@@ -28,3 +39,7 @@ function shape(name, args, fillOrStroke = "fill") {
 }
 
 shape.d = 80;
+shape.angle = 0;
+shape.getPoint = function(x, y, angle) {
+  return [x + shape.d * cos(angle), y + shape.d * sin(angle)];
+}

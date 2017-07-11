@@ -1,6 +1,6 @@
 var shapes = [];
 var shapeId = 0;
-var shapeNames = ["circle", "triangle"];
+var shapeNames = ["circle", "triangle", "square", "pentagon", "octogon"];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
